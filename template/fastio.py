@@ -1,17 +1,17 @@
+import os
 import sys
 from atexit import register
-from io import BytesIO, FileIO, StringIO
+from io import BytesIO
 
-INP_FILE = 0
-OUT_FILE = 1
+sys.stdout = BytesIO()
+register(lambda: os.write(1, sys.stdout.getvalue()))
 
-if sys.version_info[0] < 3:
-    input = iter(FileIO(INP_FILE).read().splitlines()).next
+readline = BytesIO(os.read(0, os.fstat(0).st_size)).readline
+write = sys.stdout.write
+input = lambda: readline().decode().rstrip('\r\n')
 
-    sys.stdout = BytesIO()
-    register(lambda: FileIO(OUT_FILE, 'w').write(sys.stdout.getvalue()))
-else:
-    input = iter(FileIO(INP_FILE).read().splitlines()).__next__
 
-    sys.stdout = StringIO()
-    register(lambda: FileIO(OUT_FILE, 'w').write(sys.stdout.getvalue().encode()))
+def print(*args, sep=' ', end='\n', f=sys.stdout):
+    f.write(sep.join(map(str, args)).encode())
+    f.write(end.encode())
+

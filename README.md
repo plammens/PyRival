@@ -6,7 +6,7 @@
 ---
 
 ### About
-- A Master Template optimized for performance in all flavors of Python
+- A Master Template optimized for performance in PyPy 3
 - A Lite version for use in Python/PyPy 3 
 - Optimized code snippets written in Python 3
 
@@ -14,7 +14,6 @@
 
 ### Template
 - [Master Template](template/template.py)
-- [Lite Template](template/lite.py)
 - [Fast I/O](template/fastio.py)
 - [Fast Integer Input](template/read_ints.py)
 - [Infinite Recursion](template/infinite_recursion.py)
